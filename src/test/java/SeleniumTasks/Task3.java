@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import utilities.Driver;
 
@@ -41,12 +42,16 @@ import java.util.List;
   */
 
 public class Task3 {
-    @Test
-    public void TaskPositiveTestWithValidCredentials(){
-
+    @BeforeTest
+    public void BeforeEachTest(){
         WebDriver driver = Driver.getDriver();
         driver.get("http://zero.webappsecurity.com/");
         driver.findElement(By.id("signin_button")).click();
+    }
+
+    @Test
+    public void TaskPositiveTestWithValidCredentials(){
+        WebDriver driver = Driver.getDriver();
         driver.findElement(By.id("user_login")).sendKeys("username");
         driver.findElement(By.id("user_password")).sendKeys("password");
         driver.findElement(By.xpath("//input[@class='btn btn-primary']")).click();
@@ -70,8 +75,6 @@ public class Task3 {
     @Test
     public void TaskNegativeTestWithInValidCredentials(){
         WebDriver driver = Driver.getDriver();
-        driver.get("http://zero.webappsecurity.com/");
-        driver.findElement(By.id("signin_button")).click();
         driver.findElement(By.id("user_login")).sendKeys("usernamertert");
         driver.findElement(By.id("user_password")).sendKeys("passwordrtret");
         driver.findElement(By.xpath("//input[@class='btn btn-primary']")).click();
